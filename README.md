@@ -1,1 +1,3 @@
-# e-commerce_api_nest_
+# hrsteps-nestjs
+
+Ini untuk repo hrsteps nest.js framework yah
