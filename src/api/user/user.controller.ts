@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { GetUser } from 'src/common/decorator/get-user.decorator';
 import { Roles } from 'src/common/decorator/roles.decorator';
 import { SecurityType } from 'src/common/enum/enum';
@@ -19,10 +19,11 @@ export class UserController {
   }
 
   @Get('profile/:id')
-  @Roles(SecurityType.CUSTOMER)
+  @Roles(SecurityType.CUSTOMER) 
   @UseGuards(JwGuard, RolesGuard)
   async getUserById(@GetUser() request: UserEntity): Promise<UserEntity> {
     const user = await this.userService.getUserById(request.id);
     return user;
   }
+
 }

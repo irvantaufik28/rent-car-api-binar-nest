@@ -1,6 +1,11 @@
-import { RefreshTokenEntity } from 'src/api/auth/entity/refresh-token.entity';
 import { SecurityType } from 'src/common/enum/enum';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserDetailEntity } from './user-detail.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -13,11 +18,14 @@ export class UserEntity {
   @Column({ nullable: false })
   password: string;
 
-  @Column({ nullable: false, enum: SecurityType, type: String, default: SecurityType.CUSTOMER})
+  @Column({
+    nullable: false,
+    enum: SecurityType,
+    type: String,
+    default: SecurityType.CUSTOMER,
+  })
   role_name: SecurityType.CUSTOMER;
 
-  @OneToMany(() => RefreshTokenEntity, (refreshToken) => refreshToken.user, {
-    eager: true,
-  })
-  refreshToken: RefreshTokenEntity[];
+  @OneToOne(() => UserDetailEntity, (userDetail) => userDetail.user_detail)
+  user_detail: UserDetailEntity;
 }

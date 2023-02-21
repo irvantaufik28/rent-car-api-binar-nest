@@ -30,6 +30,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-fastify": "^9.3.9",
     "@nestjs/typeorm": "^9.0.1",
+    "@types/bcrypt": "^5.0.0",
     "@types/passport-jwt": "^3.0.8",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",

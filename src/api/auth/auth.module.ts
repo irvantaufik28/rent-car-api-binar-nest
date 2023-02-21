@@ -5,10 +5,12 @@ import { UserRepository } from '../user/repository/user.repository';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from 'src/common/helper/jwt/jwt.strategy';
+import { UserEntity } from '../user/entity/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    JwtModule.register(jwtConfig),
+    JwtModule.register(jwtConfig), TypeOrmModule.forFeature([UserEntity])
   ],
   providers: [AuthService, UserRepository, JwtStrategy],
   controllers: [AuthController],
