@@ -35,9 +35,11 @@ export class AuthService {
   async createAccessToken(user: UserEntity): Promise<string> {
     const payload = {
       id: user.id,
-      is_admin: user.is_admin,
+      role_name: user.role_name,
     };
     const access_token = await this.JwtService.signAsync(payload);
     return access_token
   }
+
+
 }

@@ -1,5 +1,8 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { GetUser } from 'src/common/decorator/get-user.decorator';
+import { Roles } from 'src/common/decorator/roles.decorator';
+import { SecurityType } from 'src/common/enum/enum';
+import { RolesGuard } from 'src/common/guard/jwt-role.guard';
 import { JwGuard } from 'src/common/guard/jwt.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entity/user.entity';
@@ -16,11 +19,9 @@ export class UserController {
   }
 
   @Get('profile/:id')
-  @UseGuards(JwGuard)
-  async getUserById(
-    @Param('id') id: number,
-    @GetUser() request: UserEntity,
-  ): Promise<UserEntity> {
+  @Roles(SecurityType.CUSTOMER)
+  @UseGuards(JwGuard, RolesGuard)
+  async getUserById(@GetUser() request: UserEntity): Promise<UserEntity> {
     const user = await this.userService.getUserById(request.id);
     return user;
   }
