@@ -22,11 +22,11 @@ export class UserRepository extends Repository<UserEntity> {
         HttpStatus.FORBIDDEN,
       );
     }
-    delete user.confirm_password;
     const savedUser = await this.save(user);
-
+        
     return savedUser;
   }
+
 
   async findById(id: number): Promise<UserEntity> {
     const user = await this.findOne({

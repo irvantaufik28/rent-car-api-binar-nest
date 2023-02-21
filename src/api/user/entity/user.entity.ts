@@ -16,7 +16,8 @@ password: string
 @Column('boolean', {default: false})
 is_admin = false
 
-@OneToMany(()=> RefreshTokenEntity, (refreshToken) => refreshToken.user)
+@OneToMany(()=> RefreshTokenEntity, (refreshToken) => refreshToken.user, 
+{eager: true})
 refreshToken: RefreshTokenEntity[]
 
 }

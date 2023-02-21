@@ -4,12 +4,13 @@ import { jwtConfig } from 'src/common/config/jwt.config';
 import { UserRepository } from '../user/repository/user.repository';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { JwtStrategy } from 'src/common/helper/jwt/jwt.strategy';
 
 @Module({
   imports: [
     JwtModule.register(jwtConfig),
   ],
-  providers: [AuthService, UserRepository],
+  providers: [AuthService, UserRepository, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}
