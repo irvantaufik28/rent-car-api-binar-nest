@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, maxLength, minLength, MinLength } from "class-validator";
 
 export class CreateUserDto {  
+    id: number
 
     @IsNotEmpty()
     @IsEmail()
@@ -26,6 +27,5 @@ export class CreateUserDto {
     @IsNotEmpty()
     address: string
 
-    @IsNotEmpty()
     user_id: number
 }

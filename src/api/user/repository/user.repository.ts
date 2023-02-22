@@ -23,6 +23,7 @@ export class UserRepository extends Repository<UserEntity> {
     user.email = email;
     user.password = bcrypt.hashSync(password, 10);
     user.confirm_password = confirm_password;
+
     if (!bcrypt.compareSync(user.confirm_password, user.password)) {
       throw new HttpException(
         'password and confirm password not match',
@@ -35,11 +36,13 @@ export class UserRepository extends Repository<UserEntity> {
     return savedUser;
   }
 
-  async findById(id: number): Promise<UserEntity> {
+  async findById(id: number, option: object = {}): Promise<UserEntity> {
     const user = await this.userRepository.findOne({
       where: {
         id,
       },
+      select: ['id', 'email', 'role_name'],
+      relations: option,
     });
     return user;
   }

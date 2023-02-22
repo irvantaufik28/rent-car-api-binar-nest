@@ -18,6 +18,8 @@ export class UserDetailRepository extends Repository<UserDetailEntity>{
   async createDetailUser(createUserDto: CreateUserDto): Promise<CreateUserDto> {
     const { user_id, first_name, last_name, phone_number, address } = createUserDto;
     const user_detail = createUserDto;
+
+  
     user_detail.first_name = first_name;
     user_detail.last_name = last_name;
     user_detail.phone_number = phone_number;

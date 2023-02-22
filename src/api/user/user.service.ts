@@ -11,14 +11,21 @@ export class UserService {
     private readonly userDetailRepository: UserDetailRepository,
   ) {}
 
-  async createUser(createUSerDto: CreateUserDto): Promise<CreateUserDto> {
-    const user = await this.userRepository.createUser(createUSerDto);
+  async createUser(createUserDto: CreateUserDto): Promise<CreateUserDto> {
+    const user = await this.userRepository.createUser(createUserDto);
+    createUserDto.user_id = user.id
+    await this.userDetailRepository.createDetailUser(createUserDto)
 
     return user;
   }
 
   async getUserById(id: number): Promise<UserEntity> {
-    const user = await this.userRepository.findById(id);
+    const inculde: object = {
+      user_detail: true,
+    };
+
+
+    const user = await this.userRepository.findById(id, inculde);
     if (!user) {
       throw new HttpException('user not found', HttpStatus.NOT_FOUND);
     }

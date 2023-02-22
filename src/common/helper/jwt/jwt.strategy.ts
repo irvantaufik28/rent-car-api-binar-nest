@@ -20,10 +20,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         throw new UnauthorizedException('user not found');
         
     }
+    
     return {
-      user_id: payload.id,
-      email: payload.email,
-      role_name: payload.role_name,
+      id: user.id,
+      email: user.email,
+      role_name: user.role_name,
     };
   }
 }

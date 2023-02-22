@@ -18,11 +18,12 @@ export class UserController {
     return user;
   }
 
-  @Get('profile/:id')
+  @Get('profile')
   @Roles(SecurityType.CUSTOMER) 
   @UseGuards(JwGuard, RolesGuard)
   async getUserById(@GetUser() request: UserEntity): Promise<UserEntity> {
     const user = await this.userService.getUserById(request.id);
+
     return user;
   }
 
