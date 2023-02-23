@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserEntity } from '../entity/user.entity';
@@ -30,8 +30,9 @@ export class UserRepository extends Repository<UserEntity> {
         HttpStatus.FORBIDDEN,
       );
     }
-    delete user.confirm_password;
     const savedUser = await this.userRepository.save(user);
+    delete savedUser.confirm_password;
+    delete savedUser.password;
 
     return savedUser;
   }

@@ -1,4 +1,5 @@
 import { SecurityType } from 'src/common/enum/enum';
+import { Exclude } from "class-transformer";
 import {
   Column,
   Entity,
@@ -16,6 +17,7 @@ export class UserEntity {
   email: string;
 
   @Column({ nullable: false })
+  @Exclude()
   password: string;
 
   @Column({
