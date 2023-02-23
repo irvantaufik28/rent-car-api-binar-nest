@@ -9,7 +9,11 @@ export class PageMetaDto {
   @ApiProperty()
   readonly itemCount: number;
   @ApiProperty()
-  readonly PageCount: number;
+  readonly pageCount: number;
+  @ApiProperty()
+  readonly nextPage: any;
+  @ApiProperty()
+  readonly previousPage: any;
   @ApiProperty()
   readonly hasPreviousPage: boolean;
   @ApiProperty()
@@ -19,8 +23,10 @@ export class PageMetaDto {
     this.page = pageOptionsDto.page;
     this.take = pageOptionsDto.take;
     this.itemCount = itemCount;
-    this.PageCount = Math.ceil(this.itemCount / this.take);
-    this.hasPreviousPage = this.page > 1;
-    this.hasPreviousPage = this.page < this.PageCount;
+    this.pageCount = Math.ceil(this.itemCount / this.take);
+    this.nextPage = this.page + 1;
+    this.previousPage = this.page - 1;
+    this.hasNextPage = this.page > 1;
+    this.hasPreviousPage = this.page < this.pageCount;
   }
 }

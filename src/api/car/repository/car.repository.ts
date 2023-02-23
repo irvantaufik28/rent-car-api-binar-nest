@@ -19,34 +19,51 @@ export class CarRepository extends Repository<CarEntity> {
   }
 
   getAllCarPagination = async (
-    pageOptionsDto : PageOptionsDto
+    pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<CreateCarDto>> => {
-    const queryBuilder = this.carRepository.createQueryBuilder('car')
+    const queryBuilder = this.carRepository.createQueryBuilder('car');
 
     queryBuilder
-    .orderBy('car.createdAt', pageOptionsDto.order)
-    .skip(pageOptionsDto.skip)
-    .take(pageOptionsDto.take)
+      .orderBy('car.createdAt', pageOptionsDto.order)
+      .skip(pageOptionsDto.skip)
+      .take(pageOptionsDto.take);
 
-    const itemCount = await queryBuilder.getCount()
-    const { entities } = await queryBuilder.getRawAndEntities()
+    const itemCount = await queryBuilder.getCount();
+    const { entities } = await queryBuilder.getRawAndEntities();
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
+    return new PageDto(entities, pageMetaDto);
+  };
+  
+  getCarById = async (id: number, options: object = {}): Promise<CarEntity> => {
+    const car = this.carRepository.findOne({
+      where: {
+        id,
+      },
+      relations: options,
+    });
+    return car;
+  };
 
-    return new PageDto(entities, pageMetaDto)
-  }
+  createCar = async (createCarDto: CreateCarDto): Promise<CreateCarDto> => {
+    const { name, category, price, image } = createCarDto;
+    const car = createCarDto;
 
-   createCar = async (createCarDto: CreateCarDto): Promise<CreateCarDto> => {
-    const {name , category, price, image } = createCarDto
-    const car = createCarDto
-
-    car.name = name
-    car.category = category
-    car.price = price
-    car.image = image
+    car.name = name;
+    car.category = category;
+    car.price = price;
+    car.image = image;
 
     return await this.carRepository.save(car);
+  };
+
+  updateCar = async(id: number, updateCarDto :CreateCarDto): Promise<any> =>  {
+    return await this.carRepository.update(id, updateCarDto)
+    
   }
 
-
+  deleteCar = async(id:number): Promise<any> => {
+    return await this.carRepository.delete(id)
+  }
+  
 }
