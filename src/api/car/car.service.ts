@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
 import { PageDto } from 'src/common/pageDTO/page.dto';
-import { UpdateResult } from 'typeorm';
 import { CreateCarDto } from './dto/car-create.dto';
 import { CarEntity } from './entity/car.entity';
 import { CarRepository } from './repository/car.repository';
@@ -24,7 +23,6 @@ export class CarService {
 
   getCarById = async (id: number): Promise<CarEntity> => {
     const car = await this.carRepository.getCarById(id);
-    console.log(car);
     if (!car) {
       throw new HttpException('car not found', HttpStatus.NOT_FOUND);
     }
@@ -44,6 +42,9 @@ export class CarService {
     if (!car) {
       throw new HttpException('car not found', HttpStatus.NOT_FOUND);
     }
-    return await this.carRepository.delete(id);
+     await this.carRepository.delete(id);
+    return {
+      msg: 'success delete'
+    }
   };
 }
