@@ -22,7 +22,6 @@ import { PageDto } from 'src/common/pageDTO/page.dto';
 import { CarProducerService } from '../queue/producer/car.produce.service';
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/car-create.dto';
-import { CarEntity } from './entity/car.entity';
 
 @Controller('car')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -32,8 +31,8 @@ export class CarController {
     private readonly carProducerService : CarProducerService
     ) {}
   @Post()
-  @Roles(SecurityType.STAF)
-  @UseGuards(JwGuard, RolesGuard)
+  // @Roles(SecurityType.STAF)
+  // @UseGuards(JwGuard, RolesGuard)
   async createCar(@Body() payload: CreateCarDto): Promise<CreateCarDto> {
     const car = await this.carService.createCar(payload);
     return car;
@@ -44,7 +43,7 @@ export class CarController {
   async getCarPagination(
     @Query() pageOptionDto: PageOptionsDto,
   ): Promise<PageDto<CreateCarDto>> {
-    return this.carService.getAllCarPage(pageOptionDto);
+    return await this.carService.getAllCarPage(pageOptionDto);
   }
 
   @Get('/:id')
@@ -63,8 +62,8 @@ export class CarController {
     return this.carService.updateCar(id, payload);
   }
   @Delete('/:id')
-  // @Roles(SecurityType.STAF)
-  // @UseGuards(JwGuard, RolesGuard)
+  @Roles(SecurityType.STAF)
+  @UseGuards(JwGuard, RolesGuard)
   async deleteCar(@Param('id') id: number): Promise<any> {
     const result = this.carService.deleteCar(id);
     return result

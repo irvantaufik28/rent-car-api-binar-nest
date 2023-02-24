@@ -22,7 +22,6 @@ export class CarRepository extends Repository<CarEntity> {
     pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<CreateCarDto>> => {
     const queryBuilder = this.carRepository.createQueryBuilder('car');
-
     queryBuilder
       .orderBy('car.createdAt', pageOptionsDto.order)
       .skip(pageOptionsDto.skip)

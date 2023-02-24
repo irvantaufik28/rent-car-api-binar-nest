@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
+import { OrderEntity } from 'src/api/order/entity/order.entity';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
 
 @Entity('car')
 export class CarEntity extends BaseEntity {
@@ -25,4 +26,7 @@ export class CarEntity extends BaseEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updateAt: Date;
+
+  @OneToMany (()=> OrderEntity, (o) => o.id)
+  order: OrderEntity[]
 }
