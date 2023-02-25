@@ -3,6 +3,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CarEntity } from '../car/entity/car.entity';
 import { CarRepository } from '../car/repository/car.repository';
+import { EventsGateway } from '../events/events.gateway';
+import { NotificationsEntity } from '../notification/entity/notification.entity';
+import { NotificationService } from '../notification/notification.service';
+import { NotificationRepository } from '../notification/repository/notification.repository';
 import { OrderProducerService } from '../queue/producer/order.produce.service';
 import { QueueModule } from '../queue/queue.module';
 import { OrderEntity } from './entity/order.entity';
@@ -11,7 +15,7 @@ import { OrderService } from './order.service';
 import { OrderRepository } from './repository/order.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([OrderEntity, CarEntity]),
+  imports: [TypeOrmModule.forFeature([OrderEntity, CarEntity, NotificationsEntity]),
   BullModule.forRoot({
     redis: {
       host: 'localhost',
@@ -27,6 +31,6 @@ import { OrderRepository } from './repository/order.repository';
 
 ],
   controllers: [OrderController],
-  providers: [OrderService, OrderRepository, CarRepository, OrderProducerService, QueueModule]
+  providers: [OrderService, OrderRepository, CarRepository, OrderProducerService, NotificationService,NotificationRepository, EventsGateway ,QueueModule,]
 })
 export class OrderModule {}
