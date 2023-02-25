@@ -18,10 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "yarn build && npx typeorm -d dist/db/config.js",
-    "migration:generate": "yarn typeorm -- migration:generate",
-    "migration:run": "yarn typeorm -- migration:run",
-    "migration:revert": "yarn run typeorm -- migration:revert"
+    "typeorm": "npm run build && npx typeorm -d dist/shared/typeorm/typeormservice.js",
+    "migration:generate": "npm run typeorm -- migration:generate",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@fastify/static": "^6.9.0",
