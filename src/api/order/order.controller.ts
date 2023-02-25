@@ -46,7 +46,6 @@ export class OrderController {
     @GetUser() request: UserEntity,
   ): Promise<CreateOrderDto> {
     const order = await this.orderProduceService.createOrder(payload, request.id)
-   console.log(order)
     return order;
   }
 }

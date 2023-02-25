@@ -13,11 +13,9 @@ export class OrderProducerService {
 
   async createOrder(createOrderDto: CreateOrderDto, user_id:number) {
     const order = await this.orderService.createOrder(createOrderDto, user_id);
-    console.log(order)
     const result = await this.queue.add('createOrder-job', {
       data: order,
     });
-    console.log(result.data)
     return result.data;
   }
 }
