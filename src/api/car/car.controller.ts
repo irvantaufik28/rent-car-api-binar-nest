@@ -19,7 +19,7 @@ import { RolesGuard } from 'src/common/guard/jwt-role.guard';
 import { JwGuard } from 'src/common/guard/jwt.guard';
 import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
 import { PageDto } from 'src/common/pageDTO/page.dto';
-import { CarProducerService } from '../queue/producer/car.produce.service';
+// import { CarProducerService } from '../queue/producer/car.produce.service';
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/car-create.dto';
 
@@ -28,7 +28,7 @@ import { CreateCarDto } from './dto/car-create.dto';
 export class CarController {
   constructor(
     private readonly carService: CarService,
-    private readonly carProducerService : CarProducerService
+    // private readonly carProducerService : CarProducerService
     ) {}
   @Post()
   // @Roles(SecurityType.STAF)
@@ -48,8 +48,8 @@ export class CarController {
 
   @Get('/:id')
   async getCarById(@Param('id') id: number): Promise<any> {
-    const result = await this.carProducerService.getById(id)
-    return result.data
+    // const result = await this.carProducerService.getById(id)
+    // return result.data
   }
 
   @Put('/:id')

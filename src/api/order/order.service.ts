@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
 import { PageDto } from 'src/common/pageDTO/page.dto';
-import { CreateCarDto } from '../car/dto/car-create.dto';
 import { CarRepository } from '../car/repository/car.repository';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderRepository } from './repository/order.repository';
@@ -37,10 +36,10 @@ export class OrderService {
     createOrderDto.slip = 'ini slip'
     const order = await this.orderRepository.createOrder(createOrderDto);
 
-    const updateCar = {
-        status: true
-    }
-    await this.carRepository.update(car.id, updateCar);
+    // const updateCar = {
+    //     status: true
+    // }
+    // await this.carRepository.update(car.id, updateCar);
     return order;
   }
 }

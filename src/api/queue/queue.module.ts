@@ -6,9 +6,12 @@ import { CarRepository } from '../car/repository/car.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CarEntity } from '../car/entity/car.entity';
 import { CarService } from '../car/car.service';
+import { OrderService } from '../order/order.service';
+import { OrderRepository } from '../order/repository/order.repository';
+import { OrderEntity } from '../order/entity/order.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CarEntity]),
+  imports: [TypeOrmModule.forFeature([CarEntity, OrderEntity]),
     BullModule.forRoot({
       redis: {
         host: 'localhost',
@@ -17,10 +20,13 @@ import { CarService } from '../car/car.service';
     }),
     BullModule.registerQueue({
       name: 'car-queue',
+    },
+    {
+      name: 'order-queue',
     }),
   ],
   exports: [CarCounsumer, CarProducerService],
-  providers: [CarCounsumer, CarProducerService, CarService, CarRepository],
+  providers: [CarCounsumer, CarProducerService, CarService, CarRepository, OrderService, OrderRepository],
   controllers : []
 })
 export class QueueModule {}
