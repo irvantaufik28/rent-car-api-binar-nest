@@ -7,4 +7,4 @@ import { OrderModule } from './order/order.module';
 @Module({
   imports: [UserModule, AuthModule, CarModule, QueueModule, OrderModule],
 })
-export class ApiModule {}
+export class ApiModule { }
