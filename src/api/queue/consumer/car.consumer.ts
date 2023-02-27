@@ -5,6 +5,7 @@ import { Job } from "bull";
 export class CarCounsumer {
     @Process('getAll-job')
     getAlljob(job: Job<unknown>) {
+   
        return job.data
     }
 }

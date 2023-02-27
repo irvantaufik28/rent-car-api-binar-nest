@@ -22,9 +22,7 @@ import { OrderRepository } from './repository/order.repository';
       port: 6379,
     },
   }),
-  BullModule.registerQueue(  {
-    name: 'car-queue',
-  },
+  BullModule.registerQueue(  
     {
       name: 'order-queue',
     }),

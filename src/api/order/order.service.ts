@@ -30,19 +30,19 @@ export class OrderService {
     if (!car) {
       throw new HttpException('car not found', HttpStatus.NOT_FOUND);
     }
-    // if (car.status === true) {
-    //   throw new HttpException('car not available', HttpStatus.NOT_FOUND);
-    // }
+    if (car.status === true) {
+      throw new HttpException('car not available', HttpStatus.NOT_FOUND);
+    }
     createOrderDto.UserId = userId;
     createOrderDto.total_price = car.price;
     createOrderDto.status = true;
     createOrderDto.slip = 'ini slip';
     const order = await this.orderRepository.createOrder(createOrderDto);
 
-    const updateCar = {
-      status: true,
-    };
-    await this.carRepository.update(car.id, updateCar);
+    // const updateCar = {
+    //   status: true,
+    // };
+    // await this.carRepository.update(car.id, updateCar);
 
     const createNotificationDto: CreateNotificationDto = {
       recipient_id: 2,

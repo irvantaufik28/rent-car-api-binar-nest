@@ -13,6 +13,8 @@ import { NotificationService } from '../notification/notification.service';
 import { NotificationsEntity } from '../notification/entity/notification.entity';
 import { NotificationRepository } from '../notification/repository/notification.repository';
 import { EventsGateway } from '../events/events.gateway';
+import { OrderCounsumer } from './consumer/order.consumer';
+import { OrderProducerService } from './producer/order.produce.service';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { EventsGateway } from '../events/events.gateway';
   ],
   exports: [CarCounsumer, CarProducerService],
   providers: [
+    OrderCounsumer, OrderProducerService,
     CarCounsumer,
     CarProducerService,
     CarService,
