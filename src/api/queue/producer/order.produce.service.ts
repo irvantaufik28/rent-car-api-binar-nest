@@ -2,20 +2,17 @@ import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import { Queue } from 'bull';
 import { CreateOrderDto } from 'src/api/order/dto/create-order.dto';
-import { OrderService } from 'src/api/order/order.service';
 
 @Injectable()
 export class OrderProducerService {
-  constructor(
-    @InjectQueue('order-queue') private queue: Queue,
-    private readonly orderService: OrderService,
-  ) {}
+  constructor(@InjectQueue('order-queue') private queue: Queue) {}
 
-  async createOrder(createOrderDto: CreateOrderDto, user_id:number) {
-    const order = await this.orderService.createOrder(createOrderDto, user_id);
-    const result = await this.queue.add('createOrder-job', {
-      data: order,
-    });
-    return result.data;
+  async createOrder(createOrderDto: CreateOrderDto, user_id: number) {
+    const payload = {
+      data: createOrderDto,
+      user_id,
+    };
+    const job = await this.queue.add('createOrder-job', payload);
+    return job.id;
   }
 }

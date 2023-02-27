@@ -7,6 +7,7 @@ import { EventsGateway } from '../events/events.gateway';
 import { NotificationsEntity } from '../notification/entity/notification.entity';
 import { NotificationService } from '../notification/notification.service';
 import { NotificationRepository } from '../notification/repository/notification.repository';
+import { OrderCounsumer } from '../queue/consumer/order.consumer';
 import { OrderProducerService } from '../queue/producer/order.produce.service';
 import { QueueModule } from '../queue/queue.module';
 import { OrderEntity } from './entity/order.entity';
@@ -15,20 +16,27 @@ import { OrderService } from './order.service';
 import { OrderRepository } from './repository/order.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([OrderEntity, CarEntity, NotificationsEntity]),
-  BullModule.forRoot({
-    redis: {
-      host: 'localhost',
-      port: 6379,
-    },
-  }),
-  BullModule.registerQueue(  
-    {
+  imports: [
+    TypeOrmModule.forFeature([OrderEntity, CarEntity, NotificationsEntity]),
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
+    BullModule.registerQueue({
       name: 'order-queue',
     }),
-
-],
+  ],
   controllers: [OrderController],
-  providers: [OrderService, OrderRepository, CarRepository, OrderProducerService, NotificationService,NotificationRepository, EventsGateway ,QueueModule,]
+  providers: [
+    OrderService,
+    OrderRepository,
+    CarRepository,
+    OrderProducerService,
+    NotificationService,
+    NotificationRepository,
+    EventsGateway,
+  ],
 })
 export class OrderModule {}

@@ -8,6 +8,6 @@ dotenv.config();
 export const jwtConfig: JwtModuleOptions = {
   secret: process.env.SECRET_KEY,
   signOptions: {
-    expiresIn: 360,
+    expiresIn: 3600,
   },
 };

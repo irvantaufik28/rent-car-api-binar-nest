@@ -1,3 +1,4 @@
+import { InjectQueue } from '@nestjs/bull';
 import {
   Body,
   ClassSerializerInterceptor,
@@ -10,6 +11,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+
 import { GetUser } from 'src/common/decorator/get-user.decorator';
 import { Roles } from 'src/common/decorator/roles.decorator';
 import { SecurityType } from 'src/common/enum/enum';
@@ -27,8 +29,8 @@ import { OrderService } from './order.service';
 export class OrderController {
   constructor(
     private readonly orderService: OrderService,
-    private readonly orderProduceService: OrderProducerService
-    ) {}
+    private readonly orderProduceService: OrderProducerService,
+  ) {}
 
   @Get()
   @HttpCode(HttpStatus.OK)
@@ -41,11 +43,14 @@ export class OrderController {
   @Post()
   @Roles(SecurityType.CUSTOMER)
   @UseGuards(JwGuard, RolesGuard)
-  async createOrder(
+  async createOrderService(
     @Body() payload: CreateOrderDto,
     @GetUser() request: UserEntity,
-  ): Promise<CreateOrderDto> {
-    const order = await this.orderProduceService.createOrder(payload, request.id)
-    return order;
+  ): Promise<any> {
+    const order = await this.orderProduceService.createOrder(
+      payload,
+      request.id,
+    );
+return order
   }
 }
