@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
+import { PageCarOptionsDto } from 'src/common/pageDTO/page-car-options.dto';
 import { PageDto } from 'src/common/pageDTO/page.dto';
 import { CreateCarDto } from './dto/car-create.dto';
 import { CarEntity } from './entity/car.entity';
@@ -21,7 +21,7 @@ export class CarService {
   }
 
   async getAllCarPage(
-    pageOptionsDto: PageOptionsDto,
+    pageOptionsDto: PageCarOptionsDto,
   ): Promise<PageDto<CreateCarDto>> {
     const result = this.carRepository.getAllCarPagination(pageOptionsDto);
 

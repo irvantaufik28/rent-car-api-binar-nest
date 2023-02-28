@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
+import { PageCarOptionsDto } from 'src/common/pageDTO/page-car-options.dto';
 import { PageMetaDto } from 'src/common/pageDTO/page-meta.dto';
-import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
 import { PageDto } from 'src/common/pageDTO/page.dto';
 import { Repository } from 'typeorm';
 import { CreateCarDto } from '../dto/car-create.dto';
@@ -19,21 +19,54 @@ export class CarRepository extends Repository<CarEntity> {
   }
 
   getAllCarPagination = async (
-    pageOptionsDto: PageOptionsDto,
+    pageOptionsDto: PageCarOptionsDto,
   ): Promise<PageDto<CreateCarDto>> => {
+    console.log(pageOptionsDto)
     const queryBuilder = this.carRepository.createQueryBuilder('car');
-    queryBuilder
-      .orderBy('car.createdAt', pageOptionsDto.order)
-      .skip(pageOptionsDto.skip)
-      .take(pageOptionsDto.take);
 
-    const itemCount = await queryBuilder.getCount();
+    if(pageOptionsDto.name) {  
+      queryBuilder
+      .andWhere('LOWER(car.name) LIKE :name', {
+        name: `%${pageOptionsDto.name.toLowerCase()}%`
+      })
+    }
+    
+    if(pageOptionsDto.category) {
+      queryBuilder
+      .andWhere('car.category = :category', {
+        category: `${pageOptionsDto.category.toLowerCase()}`
+      })
+    }
+    if(pageOptionsDto.isRented) {
+      queryBuilder
+      .andWhere('car.status = :isRented', {
+       isRented : `${pageOptionsDto.isRented.toLocaleLowerCase()}`
+      })
+    }
+
+    if(pageOptionsDto.maxPrice) {
+      queryBuilder
+      .andWhere(':maxPrice >= car.price', {
+        maxPrice: pageOptionsDto.maxPrice
+      })
+    } 
+    
+    if(pageOptionsDto.minPrice) {
+      queryBuilder
+      .andWhere(':minPrice <= car.price', {
+        maxPrice: pageOptionsDto.minPrice
+      })
+    }
+    
+    queryBuilder.orderBy('car.createdAt', pageOptionsDto.order)
+        .skip(pageOptionsDto.skip)
+        .take(pageOptionsDto.take);    const itemCount = await queryBuilder.getCount();
     const { entities } = await queryBuilder.getRawAndEntities();
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
     return new PageDto(entities, pageMetaDto);
   };
-  
+
   getCarById = async (id: number, options: object = {}): Promise<CarEntity> => {
     const car = this.carRepository.findOne({
       where: {
@@ -56,13 +89,11 @@ export class CarRepository extends Repository<CarEntity> {
     return await this.carRepository.save(car);
   };
 
-  updateCar = async(id: number, updateCarDto :CreateCarDto): Promise<any> =>  {
-    return await this.carRepository.update(id, updateCarDto)
-    
-  }
+  updateCar = async (id: number, updateCarDto: CreateCarDto): Promise<any> => {
+    return await this.carRepository.update(id, updateCarDto);
+  };
 
-  deleteCar = async(id:number): Promise<any> => {
-    return await this.carRepository.delete(id)
-  }
-  
+  deleteCar = async (id: number): Promise<any> => {
+    return await this.carRepository.delete(id);
+  };
 }
