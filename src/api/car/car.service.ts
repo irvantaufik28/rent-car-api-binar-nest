@@ -9,7 +9,14 @@ import { CarRepository } from './repository/car.repository';
 export class CarService {
   constructor(private readonly carRepository: CarRepository) {}
 
-  async createCar(createCarDto: CreateCarDto): Promise<CreateCarDto> {
+  async createCar(
+    createCarDto: CreateCarDto,
+    file: any,
+  ): Promise<CreateCarDto> {
+    if (file) {
+      createCarDto.image = file.path;
+    }
+
     return await this.carRepository.createCar(createCarDto);
   }
 
@@ -42,9 +49,7 @@ export class CarService {
     if (!car) {
       throw new HttpException('car not found', HttpStatus.NOT_FOUND);
     }
-     await this.carRepository.delete(id);
-    return {
-      msg: 'success delete'
-    }
+    await this.carRepository.delete(id);
+    return new HttpException('delete successfully', HttpStatus.OK);
   };
 }

@@ -18,7 +18,7 @@ export class CarEntity extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   status: boolean;
 
-  @Column()
+  @Column({nullable: true})
   image: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

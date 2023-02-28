@@ -21,7 +21,7 @@ export class CreateCarDto {
   @IsNotEmpty({ message: 'Price cannot be empty' })
   price: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   image: string;
   
 }
