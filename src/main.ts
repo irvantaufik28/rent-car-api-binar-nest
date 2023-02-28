@@ -2,16 +2,9 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import { EventsGateway } from './api/events/events.gateway';
+import { NestFastifyApplication } from '@nestjs/platform-fastify';
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter(),
-  );
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule);
 
   const config: ConfigService = app.get(ConfigService);
   const port: number = config.get<number>('PORT');

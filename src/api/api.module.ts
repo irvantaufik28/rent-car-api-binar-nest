@@ -6,8 +6,18 @@ import { QueueModule } from './queue/queue.module';
 import { OrderModule } from './order/order.module';
 import { EventsModule } from './events/events.module';
 import { NotificationModule } from './notification/notification.module';
+import { UploadModule } from './upload/upload.module';
 @Module({
-  imports: [UserModule, AuthModule, CarModule, QueueModule, OrderModule, EventsModule, NotificationModule],
+  imports: [
+    UserModule,
+    AuthModule,
+    CarModule,
+    QueueModule,
+    OrderModule,
+    EventsModule,
+    NotificationModule,
+    UploadModule,
+  ],
   providers: [],
 })
-export class ApiModule { }
+export class ApiModule {}
