@@ -14,7 +14,8 @@ export class OrderCounsumer {
   )
   {
     const { user_id, data: createOrderDto } = job.data;
-     await this.orderService.createOrder(createOrderDto, user_id);
+    
+   await this.orderService.createOrder(createOrderDto, user_id);
 
   }
 }

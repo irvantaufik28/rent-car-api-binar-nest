@@ -20,7 +20,7 @@ import { Roles } from 'src/common/decorator/roles.decorator';
 import { SecurityType } from 'src/common/enum/enum';
 import { RolesGuard } from 'src/common/guard/jwt-role.guard';
 import { JwGuard } from 'src/common/guard/jwt.guard';
-import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
+import { PageCarOptionsDto } from 'src/common/pageDTO/page-car-options.dto';
 import { PageDto } from 'src/common/pageDTO/page.dto';
 import { CarProducerService } from '../queue/producer/car.produce.service';
 import { CarService } from './car.service';
@@ -69,7 +69,7 @@ export class CarController {
   @Get()
   @HttpCode(HttpStatus.OK)
   async getCarPagination(
-    @Query() pageOptionDto: PageOptionsDto,
+    @Query() pageOptionDto: PageCarOptionsDto, 
   ): Promise<PageDto<CreateCarDto>> {
     return await this.carService.getAllCarPage(pageOptionDto);
   }

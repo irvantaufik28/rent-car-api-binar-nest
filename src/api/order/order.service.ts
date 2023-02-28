@@ -28,7 +28,13 @@ export class OrderService {
   ): Promise<CreateOrderDto> {
     const car = await this.carRepository.getCarById(createOrderDto.CarId);
     if (!car) {
-      throw new HttpException('car not found', HttpStatus.NOT_FOUND);
+      const createNotificationDto: CreateNotificationDto = {
+        recipient_id: 2,
+        sender_id: userId,
+        content: `gagal ${userId}`,
+      };
+  
+      await this.notificationService.createNotif(createNotificationDto);
     }
     if (car.status === true) {
       throw new HttpException('car not available', HttpStatus.NOT_FOUND);
@@ -39,10 +45,10 @@ export class OrderService {
     createOrderDto.slip = 'ini slip';
     const order = await this.orderRepository.createOrder(createOrderDto);
 
-    const updateCar = {
-      status: true,
-    };
-    await this.carRepository.update(car.id, updateCar);
+    // const updateCar = {
+    //   status: true,
+    // };
+    // await this.carRepository.update(car.id, updateCar);
 
     const createNotificationDto: CreateNotificationDto = {
       recipient_id: 2,
