@@ -14,7 +14,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Roles } from 'src/common/decorator/roles.decorator';
 import { SecurityType } from 'src/common/enum/enum';
@@ -35,27 +35,7 @@ export class CarController {
     private readonly carProducerService: CarProducerService,
   ) {}
   @Post()
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, cb) => {
-          const name = file.originalname.split('.')[0];
-          const fileExtension = file.originalname.split('.')[1];
-          const newFileName =
-            name.split(' ').join('_') + '_' + Date.now() + '.' + fileExtension;
-  
-          cb(null, newFileName);
-        }
-      }),
-      fileFilter: (req, file, cb) => {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-          return cb(null, false);
-        }
-        cb(null, true);
-      },
-    })
-  )
+  @UseInterceptors(FileInterceptor('file'))
   // @Roles(SecurityType.STAF)
   // @UseGuards(JwGuard, RolesGuard)
   async createCar(

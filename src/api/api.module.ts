@@ -6,7 +6,7 @@ import { QueueModule } from './queue/queue.module';
 import { OrderModule } from './order/order.module';
 import { EventsModule } from './events/events.module';
 import { NotificationModule } from './notification/notification.module';
-import { UploadModule } from './upload/upload.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 @Module({
   imports: [
     UserModule,
@@ -16,7 +16,7 @@ import { UploadModule } from './upload/upload.module';
     OrderModule,
     EventsModule,
     NotificationModule,
-    UploadModule,
+    CloudinaryModule,
   ],
   providers: [],
 })

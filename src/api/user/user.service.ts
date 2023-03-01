@@ -12,11 +12,13 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<CreateUserDto> {
-    const user = await this.userRepository.createUser(createUserDto);
-    createUserDto.user_id = user.id;
-    await this.userDetailRepository.createDetailUser(createUserDto);
+  
+      const user = await this.userRepository.createUser(createUserDto);
+      createUserDto.user_id = user.id;
+      await this.userDetailRepository.createDetailUser(createUserDto);
 
-    return user;
+      return user;
+
   }
 
   async getUserById(id: number): Promise<UserEntity> {

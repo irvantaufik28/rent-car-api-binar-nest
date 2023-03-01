@@ -15,6 +15,8 @@ import { NotificationRepository } from '../notification/repository/notification.
 import { EventsGateway } from '../events/events.gateway';
 import { OrderCounsumer } from './consumer/order.consumer';
 import { OrderProducerService } from './producer/order.produce.service';
+import { CloudinaryProvider } from '../cloudinary/cloudinary.provider';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { OrderProducerService } from './producer/order.produce.service';
     NotificationService,
     NotificationRepository,
     EventsGateway,
+    CloudinaryProvider,
+    CloudinaryService
   ],
   controllers: [],
 })

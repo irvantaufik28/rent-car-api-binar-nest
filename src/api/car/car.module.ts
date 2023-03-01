@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CarEntity } from './entity/car.entity';
 import { CarRepository } from './repository/car.repository';
 import { CarProducerService } from '../queue/producer/car.produce.service';
-import { QueueModule } from '../queue/queue.module';
 import { BullModule } from '@nestjs/bull';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { CloudinaryProvider } from '../cloudinary/cloudinary.provider';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CarEntity]),
@@ -20,7 +21,7 @@ import { BullModule } from '@nestjs/bull';
     name: 'car-queue',
   }),
 ], 
-  providers: [CarService, CarRepository, CarProducerService, QueueModule],
+  providers: [CarService, CarRepository, CarProducerService, CloudinaryService, CloudinaryProvider],
   controllers: [CarController],
   exports: [CarRepository, CarService]
 })

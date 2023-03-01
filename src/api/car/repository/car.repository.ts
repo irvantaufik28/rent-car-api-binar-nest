@@ -21,46 +21,42 @@ export class CarRepository extends Repository<CarEntity> {
   getAllCarPagination = async (
     pageOptionsDto: PageCarOptionsDto,
   ): Promise<PageDto<CreateCarDto>> => {
-    console.log(pageOptionsDto)
     const queryBuilder = this.carRepository.createQueryBuilder('car');
 
-    if(pageOptionsDto.name) {  
-      queryBuilder
-      .andWhere('LOWER(car.name) LIKE :name', {
-        name: `%${pageOptionsDto.name.toLowerCase()}%`
-      })
-    }
-    
-    if(pageOptionsDto.category) {
-      queryBuilder
-      .andWhere('car.category = :category', {
-        category: `${pageOptionsDto.category.toLowerCase()}`
-      })
-    }
-    if(pageOptionsDto.isRented) {
-      queryBuilder
-      .andWhere('car.status = :isRented', {
-       isRented : `${pageOptionsDto.isRented.toLocaleLowerCase()}`
-      })
+    if (pageOptionsDto.name) {
+      queryBuilder.andWhere('LOWER(car.name) LIKE :name', {
+        name: `%${pageOptionsDto.name.toLowerCase()}%`,
+      });
     }
 
-    if(pageOptionsDto.maxPrice) {
-      queryBuilder
-      .andWhere(':maxPrice >= car.price', {
-        maxPrice: pageOptionsDto.maxPrice
-      })
-    } 
-    
-    if(pageOptionsDto.minPrice) {
-      queryBuilder
-      .andWhere(':minPrice <= car.price', {
-        maxPrice: pageOptionsDto.minPrice
-      })
+    if (pageOptionsDto.category) {
+      queryBuilder.andWhere('car.category = :category', {
+        category: `${pageOptionsDto.category.toLowerCase()}`,
+      });
     }
-    
-    queryBuilder.orderBy('car.createdAt', pageOptionsDto.order)
-        .skip(pageOptionsDto.skip)
-        .take(pageOptionsDto.take);    const itemCount = await queryBuilder.getCount();
+    if (pageOptionsDto.isRented) {
+      queryBuilder.andWhere('car.status = :isRented', {
+        isRented: `${pageOptionsDto.isRented.toLocaleLowerCase()}`,
+      });
+    }
+
+    if (pageOptionsDto.maxPrice) {
+      queryBuilder.andWhere(':maxPrice >= car.price', {
+        maxPrice: pageOptionsDto.maxPrice,
+      });
+    }
+
+    if (pageOptionsDto.minPrice) {
+      queryBuilder.andWhere(':minPrice <= car.price', {
+        maxPrice: pageOptionsDto.minPrice,
+      });
+    }
+
+    queryBuilder
+      .orderBy('car.createdAt', pageOptionsDto.order)
+      .skip(pageOptionsDto.skip)
+      .take(pageOptionsDto.take);
+    const itemCount = await queryBuilder.getCount();
     const { entities } = await queryBuilder.getRawAndEntities();
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
