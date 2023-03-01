@@ -5,6 +5,7 @@ import { CarRepository } from '../car/repository/car.repository';
 import { CreateNotificationDto } from '../notification/dto/create-notification.dto';
 import { NotificationService } from '../notification/notification.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { OrderEntity } from './entity/order.entity';
 import { OrderRepository } from './repository/order.repository';
 
 @Injectable()
@@ -33,7 +34,7 @@ export class OrderService {
         sender_id: userId,
         content: `gagal ${userId}`,
       };
-  
+
       await this.notificationService.createNotif(createNotificationDto);
     }
     if (car.status === true) {
@@ -60,5 +61,30 @@ export class OrderService {
 
     await this.notificationService.createNotif(createNotificationDto);
     return order;
+  }
+
+  async getOrderReport(params): Promise<any> {
+    const orders = await this.orderRepository.orderReport(params);
+
+    const orderCountByDate = {};
+    for (const order of orders) {
+      const orderDate = new Date(order.createdAt)
+        .toISOString()
+        .substring(0, 10);
+      if (orderCountByDate[orderDate]) {
+        orderCountByDate[orderDate]++;
+      } else {
+        orderCountByDate[orderDate] = 1;
+      }
+    }
+
+    const result = Object.entries(orderCountByDate).map(
+      ([date, orderCount]) => ({
+        date,
+        orderCount: orderCount,
+      }),
+    );
+   
+    return result;
   }
 }

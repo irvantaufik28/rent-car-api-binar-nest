@@ -53,4 +53,12 @@ export class OrderController {
     );
 return order
   }
+
+  @Get('report')
+  async getOrderReport(
+    @Query('from') from: string,
+    @Query('until') until: string
+  ): Promise<any> {
+    return await this.orderService.getOrderReport({from, until})
+  }
 }
