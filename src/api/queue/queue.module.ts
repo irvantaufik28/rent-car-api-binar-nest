@@ -23,8 +23,8 @@ import { CloudinaryService } from '../cloudinary/cloudinary.service';
     TypeOrmModule.forFeature([CarEntity, OrderEntity, NotificationsEntity]),
     BullModule.forRoot({
       redis: {
-        host: 'localhost',
-        port: 6379,
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT),
       },
     }),
     BullModule.registerQueue(

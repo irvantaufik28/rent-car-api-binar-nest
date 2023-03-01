@@ -1,8 +1,4 @@
 import * as dotenv from 'dotenv';
-import { CarEntity } from 'src/api/car/entity/car.entity';
-import { OrderEntity } from 'src/api/order/entity/order.entity';
-import { UserDetailEntity } from 'src/api/user/entity/user-detail.entity';
-import { UserEntity } from 'src/api/user/entity/user.entity';
 import { DataSource, DataSourceOptions } from "typeorm";
 dotenv.config();
 

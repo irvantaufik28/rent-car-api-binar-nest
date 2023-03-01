@@ -45,10 +45,12 @@ export class OrderService {
     createOrderDto.slip = 'ini slip';
     const order = await this.orderRepository.createOrder(createOrderDto);
 
-    // const updateCar = {
-    //   status: true,
-    // };
-    // await this.carRepository.update(car.id, updateCar);
+    const updateCar = {
+      status: true,
+      start_rent_at: order.start_rent_at,
+      finish_rent_at: order.finish_rent_at,
+    };
+    await this.carRepository.update(car.id, updateCar);
 
     const createNotificationDto: CreateNotificationDto = {
       recipient_id: 2,

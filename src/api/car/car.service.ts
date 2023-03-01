@@ -25,12 +25,16 @@ export class CarService {
     return await this.carRepository.createCar(createCarDto);
   }
 
-  async getAllCarPage(
-    pageOptionsDto: PageCarOptionsDto,
-  ): Promise<PageDto<CreateCarDto>> {
-    const result = this.carRepository.getAllCarPagination(pageOptionsDto);
-
-    return result;
+  async getAllCarPage(pageOptionsDto: PageCarOptionsDto): Promise<any> {
+    const result = await this.carRepository.getAllCarPagination(pageOptionsDto);
+    const res = {
+      page: result.meta.page,
+      pageSize: result.meta.take,
+      pageCount: result.meta.pageCount,
+      Count: result.meta.itemCount,
+      cars: result.cars,
+    };
+    return res;
   }
 
   getCarById = async (id: number): Promise<CarEntity> => {

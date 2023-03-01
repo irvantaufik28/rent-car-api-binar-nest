@@ -18,8 +18,8 @@ import { OrderRepository } from './repository/order.repository';
     TypeOrmModule.forFeature([OrderEntity, CarEntity, NotificationsEntity]),
     BullModule.forRoot({
       redis: {
-        host: 'localhost',
-        port: 6379,
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT),
       },
     }),
     BullModule.registerQueue({
