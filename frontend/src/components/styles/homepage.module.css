@@ -1,0 +1,49 @@
+.container {
+    width: 1280px;
+    height: 365px;
+    margin: 0 auto;
+    background-color: #F1F3FF;
+}
+
+
+.body {
+    margin: 0;
+}
+
+.wrapper {
+    min-height: 600px;
+
+}
+
+
+.left_content h1 {
+    font-size: 35px;
+    position: relative;
+    left: 90px;
+    top: 111px;
+    font-family: 'Arial';
+    font-weight: 700;
+}
+
+.left_content h4 {
+    position: relative;
+    font-size: 15px;
+    left: 90px;
+    top: 104px;
+    padding: 17px 43px;
+    font-family: 'Arial';
+    font-weight: 700;
+
+}
+
+
+.rigth_content {}
+
+.rigth_content img {
+    width: 550px;
+    height: 300px;
+    position: relative;
+    top: 67px;
+    left: 12px;
+
+}
