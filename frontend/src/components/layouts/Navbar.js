@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import logo from '../assets/icon/logo.png'
+import logo from '../../assets/icon/logo.png'
 
 export default function NavbarTop() {
   return (

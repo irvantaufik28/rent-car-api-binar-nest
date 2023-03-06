@@ -1,12 +1,12 @@
 import React from 'react';
-import './styles/footer.css'
+import '../styles/footer.css'
 import {NavLink} from 'react-router-dom'
-import icon_facebook from '../assets/icon/icon_facebook.png'
-import icon_instagram from '../assets/icon/icon_instagram.png'
-import icon_mail from '../assets/icon/icon_mail.png'
-import icon_twitch from '../assets/icon/icon_twitch.png'
-import icon_twitter from '../assets/icon/icon_twitter.png'
-import logo from '../assets/icon/logo.png'
+import icon_facebook from '../../assets/icon/icon_facebook.png'
+import icon_instagram from '../../assets/icon/icon_instagram.png'
+import icon_mail from '../../assets/icon/icon_mail.png'
+import icon_twitch from '../../assets/icon/icon_twitch.png'
+import icon_twitter from '../../assets/icon/icon_twitter.png'
+import logo from '../../assets/icon/logo.png'
 
 export default function FooterCoy() {
   return (
