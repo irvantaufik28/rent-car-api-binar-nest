@@ -1,8 +1,8 @@
 import React from "react";
 import hero from  "../../assets/img/hero.png"
-import '../styles/header.css'
+import '../styles/banner.css'
 
-export default function Header() {
+export default function Banner() {
   return (
     <>
       <div className="main-banner position-relative">

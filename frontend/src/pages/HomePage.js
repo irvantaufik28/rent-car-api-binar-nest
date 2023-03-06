@@ -1,10 +1,15 @@
 import React from 'react'
-import Header from '../components/homepage/Header'
+import Banner from '../components/homepage/Banner'
+import BestCar from '../components/homepage/BestCar'
 
 
 
 export default function HomePage() {
   return (
-    <Header />
+    <>
+    <Banner />
+    <BestCar />
+    
+    </>
   )
 }
