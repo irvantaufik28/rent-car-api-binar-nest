@@ -1,25 +1,23 @@
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import Styles from "./styles/navbar.module.css";
 import logo from '../assets/icon/logo.png'
 
 export default function NavbarTop() {
   return (
-    <div>
-      <Navbar className={Styles.header}>
-        <Container className= {Styles.container} >
-          <Navbar.Brand href="/">
-            {" "}
-            <img className={Styles.logo} src={logo} alt="logo" />
+    <>
+    <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">
+            <img src={logo} alt="logo"/>
           </Navbar.Brand>
-          <Nav className={Styles.topmenu}>
-            <Nav.Link href="/">Our Service</Nav.Link>
-            <Nav.Link href="/product">Why Us</Nav.Link>
-            <Nav.Link href="/order">Testimonial</Nav.Link>
-            <Nav.Link href="/contact">FAQ</Nav.Link>
+          <Nav className="ml-auto">
+            <Nav.Link href="#home">Out Service</Nav.Link>
+            <Nav.Link href="#features">Why Us</Nav.Link>
+            <Nav.Link href="#pricing">Testimonial</Nav.Link>
+            <Nav.Link href="#pricing">FAQ</Nav.Link>
           </Nav>
         </Container>
-      </Navbar> 
-    </div>
+      </Navbar>
+    </>
   );
 }
