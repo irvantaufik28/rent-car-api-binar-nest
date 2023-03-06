@@ -5,7 +5,7 @@ import logo from '../assets/icon/logo.png'
 export default function NavbarTop() {
   return (
     <>
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="tranparent" fixed="top"  >
         <Container>
           <Navbar.Brand href="#home">
             <img src={logo} alt="logo"/>
