@@ -14,7 +14,7 @@ function Faq() {
           </div>
           <div className="col-md-6">
             <div className="question">
-              <select className="form-select" aria-label="Default select example">
+              <select className="form-select content-option" aria-label="Default select example">
                 <option defaultValue>Open this select menu</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>

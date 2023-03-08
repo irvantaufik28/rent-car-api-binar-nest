@@ -179,3 +179,28 @@
 .form-select {
     font-weight: 700;
 }
+
+
+.content-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    row-gap: 10px;
+}
+
+.center-banner {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.content-option {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.cta-banner {
+    border-radius: 10px;
+}

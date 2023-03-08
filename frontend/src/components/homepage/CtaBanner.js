@@ -9,7 +9,7 @@ export default function CtaBanner() {
           <div className="kotak">
             <div className="cta-banner">
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-12 center-banner">
                   <div className="content-banner">
                     <h1>Sewa Mobil di (Lokasimu) Sekarang</h1>
                     <p>
