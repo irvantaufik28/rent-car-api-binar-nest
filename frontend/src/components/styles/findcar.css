@@ -1,19 +1,24 @@
 .from-input {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
-  }
+    height: auto;
+    border: 1px solid gray;
+    padding: 23px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+  
 
 .card-car img {
     width: 80%;
-    margin-left: 10%;
-    margin-top: 10%;
+    object-fit: contain;
+    height: 17vh;
 }
 
 .col-md-4 .card-car {
     border: 3px solid #e5e5e5;
     height: 50vh;
+    padding: 20px;
 }
 
 .card-title {
@@ -24,6 +29,11 @@
 .card-text {
     margin-left: 5%;
     font-weight: 600;
+}
+
+.image-car{
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -38,4 +48,20 @@
 .card-body {
   margin-top: 20px;
   padding: 15px;
+}
+
+.table-option {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-gap: 20px;
+}
+
+.seacrh-car {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    padding: 24px;
+    background: white;
+    margin-top: -50px;
+    position: relative;
+    z-index: 99;
+    border-radius: 10px;
 }
