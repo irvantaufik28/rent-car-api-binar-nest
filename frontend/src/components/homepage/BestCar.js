@@ -1,6 +1,6 @@
 import React from 'react';
 import img_service from '../../assets/img/img_service.png'
-import '../styles/bestcar.css'
+import "../styles/homepage.css";
 import icon_check from '../../assets/icon/icon_check.svg'
 
 

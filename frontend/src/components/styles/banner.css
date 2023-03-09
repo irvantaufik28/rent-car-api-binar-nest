@@ -1,39 +1,3 @@
-.container-fluid {
-  background-color: #f1f3ff;
-}
-
-.image_hero {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50% !important;
-}
-
-.title {
-  font-size: 2.2vw;
-  line-height: 50px;
-  font-weight: 700;
-  margin-bottom: 30px;
-}
-.description {
-  font-size: 2.2vw;
-  line-height: 50px;
-  font-weight: 700;
-  margin-bottom: 30px;
-}
-
-.button_banner {
-  background: green;
-  border: 0;
-  padding: 12px 28px;
-  color: white;
-  font-weight: 700;
-  font-size: 15px;
-}
-
-.image_hero img {
-    width: 100%;
-}
 
 .main-banner {
     height: 65vh;

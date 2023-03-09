@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/whyus.css'
+import "../styles/homepage.css";
 import icon_24hrs from '../../assets/icon/icon_24hrs.svg'
 import icon_complete from '../../assets/icon/icon_complete.svg'
 import icon_price from '../../assets/icon/icon_price.svg'

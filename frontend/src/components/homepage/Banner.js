@@ -1,6 +1,7 @@
 import React from "react";
 import hero from "../../assets/img/hero.png";
-import "../styles/banner.css";
+import "../styles/homepage.css";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
@@ -18,7 +19,7 @@ export default function Banner() {
                   kualitas terbaik dengan harga terjangkau. Selalu siap melayani
                   kebutuhanmu untuk sewa mobil selama 24 jam.
                 </p>
-                <button className="button_banner">Mulai Sewa Mobil</button>
+                <Link to="/find"> <button className="button_banner">Mulai Sewa Mobil</button></Link>
               </div>
             </div>
             <div className="image_hero">

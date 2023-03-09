@@ -12,7 +12,7 @@ export default function FooterCoy() {
   return (
     <footer>
       <div className="container">
-
+        
         <div className="row">
           <div className="col-md-3">
             <div className="address ">Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</div>
