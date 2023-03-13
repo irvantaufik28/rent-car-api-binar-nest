@@ -1,44 +1,25 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+
 import "../styles/homepage.css";
 import "../styles/findcar.css";
 import { Link } from "react-router-dom";
 
-export default function FromInput() {
-  const [cars, setCars] = useState([]);
-
-  useEffect(() => {
-    getCars();
-  }, []);
-
-  const getCars = async () => {
-    const result = await axios.get(
-      `https://bootcamp-rent-cars.herokuapp.com/customer/car`
-    );
-   const response = result.data.slice(0, 3);
-    setCars(response);
-  };
-
-  const seaechCar = (e) => {
-    e.prevenDefault();
-  };
-
+export default function CarList(props) {
   return (
-    <>
-      <div className="main">  
-        <div className="container">
-          <div className="row">
-          {cars.map((car)=> (
+    <div className="main">
+      <div className="container">
+        <div className="row">
+          {props.data.cars.map((car) => (
             <div className="col-md-4">
               <div className="card-car">
-                <div className="image-car"> 
-              <img
+                <div className="image-car">
+                  <img
                     src={car.image}
                     width={250}
                     height={250}
                     alt={car.name}
                   />
-                  </div>
+                </div>
                 <div className="card-body">
                   <p className="card-title">{car.name}</p>
                   <p className="card-title">Rp {car.price} / Hari</p>
@@ -50,10 +31,15 @@ export default function FromInput() {
                 </div>
               </div>
             </div>
-            ))}
-            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
+}
+
+CarList.defaultProps = {
+  data: {
+    cars: []
+  }
 }
