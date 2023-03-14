@@ -11,7 +11,7 @@ export default function CarDetailPage() {
 
   useEffect(()=> { 
     const getCarById = async() => {
-      const response = await axios.get(`http://localhost:4001/car/${id}`)
+      const response = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
       setDataCar(response.data)
     }
     getCarById();  
