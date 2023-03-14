@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../components/layouts/Navbar";
 import Footer from "../components/layouts/Footer";
 import HomePage from "../pages/HomePage";
-import FindCar from "../pages/FindCar";
+import CarList from "../pages/CarList";
+import CarDetailPage from '../pages/CarDetailPage'
 
 function RoutesIndex() {
   return (
@@ -14,7 +15,9 @@ function RoutesIndex() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/find" element={<FindCar />} />
+          <Route path="/car" element={<CarList />} />
+          <Route path="/car/:id" element={<CarDetailPage />} />
+      
         </Routes>
         <Footer />
       </div>

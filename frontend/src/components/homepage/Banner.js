@@ -19,7 +19,7 @@ export default function Banner() {
                   kualitas terbaik dengan harga terjangkau. Selalu siap melayani
                   kebutuhanmu untuk sewa mobil selama 24 jam.
                 </p>
-                <Link to="/find"> <button className="button_banner">Mulai Sewa Mobil</button></Link>
+                <Link to="/car"> <button className="button_banner">Mulai Sewa Mobil</button></Link>
               </div>
             </div>
             <div className="image_hero">

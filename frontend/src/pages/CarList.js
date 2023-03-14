@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import CarList from '../components/findcar/carlist'
-import FromOption from '../components/findcar/fromOption'
+import CarList from '../components/car/carList'
+import FromFillter from '../components/car/fromFillter'
 import Banner from '../components/homepage/Banner'
 
 export default function FindCar() {
@@ -32,7 +32,7 @@ export default function FindCar() {
   return (
     <>
       <Banner />
-      <FromOption onSubmit={onFilter} />
+      <FromFillter onSubmit={onFilter} />
       <CarList data={dataCar} />
     </>
   )
