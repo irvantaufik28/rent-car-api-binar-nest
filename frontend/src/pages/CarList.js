@@ -21,6 +21,7 @@ export default function FindCar() {
       params
     }
     );
+    console.log(params)
 
     setDataCar(response.data);
   };
