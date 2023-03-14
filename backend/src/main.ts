@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule);
+  app.enableCors();
 
   const config: ConfigService = app.get(ConfigService);
   const port: number = config.get<number>('PORT');

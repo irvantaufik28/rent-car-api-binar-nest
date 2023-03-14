@@ -63,7 +63,7 @@ export class OrderRepository extends Repository<OrderEntity> {
   }): Promise<any> => {
     let filter = {};
 
-    if (params.from !== undefined && params.until !== undefined) {
+    if (params.from !== '' && params.until !== '') {
       filter = {
         createdAt: Raw(
           (alias) => `DATE(${alias}) >= :date AND DATE(${alias}) <= :to`,

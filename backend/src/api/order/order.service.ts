@@ -65,7 +65,7 @@ export class OrderService {
 
   async getOrderReport(params): Promise<any> {
     const orders = await this.orderRepository.orderReport(params);
-
+   
     const orderCountByDate = {};
     for (const order of orders) {
       const orderDate = new Date(order.createdAt)
