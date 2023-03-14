@@ -5,7 +5,6 @@ import { CarRepository } from '../car/repository/car.repository';
 import { CreateNotificationDto } from '../notification/dto/create-notification.dto';
 import { NotificationService } from '../notification/notification.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { OrderEntity } from './entity/order.entity';
 import { OrderRepository } from './repository/order.repository';
 
 @Injectable()
@@ -16,7 +15,7 @@ export class OrderService {
     private readonly notificationService: NotificationService,
   ) {}
 
-  async getAllOrderPage(
+  async adminGetAllOrderPage(
     pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<CreateOrderDto>> {
     const result = this.orderRepository.getAllOrderPagination(pageOptionsDto);
@@ -42,7 +41,7 @@ export class OrderService {
     }
     createOrderDto.UserId = userId;
     createOrderDto.total_price = car.price;
-    createOrderDto.status = true;
+    createOrderDto.status = false;
     createOrderDto.slip = 'ini slip';
     const order = await this.orderRepository.createOrder(createOrderDto);
 

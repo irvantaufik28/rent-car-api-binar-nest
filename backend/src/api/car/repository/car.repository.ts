@@ -45,10 +45,10 @@ export class CarRepository extends Repository<CarEntity> {
         maxPrice: pageOptionsDto.maxPrice,
       });
     }
-
+    
     if (pageOptionsDto.minPrice) {
       queryBuilder.andWhere(':minPrice <= car.price', {
-        maxPrice: pageOptionsDto.minPrice,
+        minPrice: pageOptionsDto.minPrice,
       });
     }
 

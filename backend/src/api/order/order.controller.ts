@@ -37,7 +37,7 @@ export class OrderController {
   async gerOrderPagination(
     @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<CreateOrderDto>> {
-    return this.orderService.getAllOrderPage(pageOptionsDto);
+    return this.orderService.adminGetAllOrderPage(pageOptionsDto);
   }
 
   @Post()
