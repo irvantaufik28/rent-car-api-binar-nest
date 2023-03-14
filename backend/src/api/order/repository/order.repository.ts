@@ -1,6 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { PageMetaDto } from 'src/common/pageDTO/page-meta.dto';
 import { PageOptionsDto } from 'src/common/pageDTO/page-options.dto';
+import { PageOrderOptionsDto } from 'src/common/pageDTO/page-order-options.dto';
+import { PageOrderDto } from 'src/common/pageDTO/page-order.dto ';
 import { PageDto } from 'src/common/pageDTO/page.dto';
 import { Raw, Repository } from 'typeorm';
 import { CreateOrderDto } from '../dto/create-order.dto';
@@ -18,10 +20,15 @@ export class OrderRepository extends Repository<OrderEntity> {
     );
   }
 
-  getAllOrderPagination = async (
-    pageOptionsDto: PageOptionsDto,
-  ): Promise<PageDto<CreateOrderDto>> => {
+  adminGetAllOrderPagination = async (
+    pageOptionsDto: PageOrderOptionsDto,
+  ): Promise<PageOrderDto<CreateOrderDto>> => {
     const queryBuilder = this.orderRepository.createQueryBuilder('order');
+
+    queryBuilder.leftJoinAndSelect('order.user', 'user')
+    queryBuilder.where('user.id = order.UserId')
+    queryBuilder.leftJoinAndSelect('order.car', 'car')
+    queryBuilder.where('car.id = order.CarId')
 
     queryBuilder
       .orderBy('order.createdAt', pageOptionsDto.order)
@@ -31,7 +38,7 @@ export class OrderRepository extends Repository<OrderEntity> {
     const { entities } = await queryBuilder.getRawAndEntities();
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
 
-    return new PageDto(entities, pageMetaDto);
+    return new PageOrderDto(entities, pageMetaDto);
   };
 
   createOrder = async (

@@ -17,9 +17,16 @@ export class OrderService {
 
   async adminGetAllOrderPage(
     pageOptionsDto: PageOptionsDto,
-  ): Promise<PageDto<CreateOrderDto>> {
-    const result = this.orderRepository.getAllOrderPagination(pageOptionsDto);
-    return result;
+  ): Promise<any> {
+    const order = await this.orderRepository.adminGetAllOrderPagination(pageOptionsDto);
+    const res = {
+      page: order.meta.page,
+      pageSize: order.meta.take,
+      pageCount: order.meta.pageCount,
+      Count: order.meta.itemCount,
+      orders: order.orders
+    }
+    return res;
   }
 
   async createOrder(
